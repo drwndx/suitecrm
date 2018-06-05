@@ -13,10 +13,11 @@ require_once 'vendor/autoload.php';
 
 use GuzzleHttp\Client;
 use SuiteCRM\api\SuiteCRMAccounts;
+use SuiteCRM\api\SuiteCRMConnect;
 
-$r  = new SuiteCRMAccounts(null);
+$r  = new SuiteCRMConnect();
 
-$a = $r->getAccounts();
+$a = $r->accounts->getAccounts();
 
 print_r($a);
 

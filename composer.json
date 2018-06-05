@@ -2,7 +2,7 @@
     "repositories": [
         {
             "type": "path",
-            "url": "vendor/suitecrm/src/SuiteCRM/api/"
+            "url": "vendor/suitecrm/"
         }
     ],
 

@@ -72,6 +72,10 @@ class SuiteCRMConnect {
      */
     public $accounts;
 
+	/**
+	 * @var SuiteCRMLeads Leads
+	 */
+	public $leads;
 
     const API_URL = "https://crm.pinnaclecart.com/suite/service/v4_1/rest.php";
 
@@ -135,6 +139,7 @@ class SuiteCRMConnect {
     {
         $this->setDefaultClient();
         $this->accounts = new SuiteCRMAccounts($this);
+	    $this->leads = new SuiteCRMLeads($this);
 
 	    $this->api_url = ($api_url !=null) ? $api_url : self::API_URL;
 	    $this->api_user = ($api_user !=null) ? $api_user : self::API_USER;

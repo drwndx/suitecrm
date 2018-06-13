@@ -1,9 +1,9 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: drwnd
- * Date: 6/4/2018
- * Time: 10:35 PM
+ * User: Mike
+ * Date: 6/1/2018
+ * Time: 5:00 PM
  */
 
 namespace SuiteCRM\api;
@@ -13,8 +13,12 @@ use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 
 
-class SuiteCRMAccounts
-{
+/**
+ * Class SuiteCRMAccounts
+ * @package SuiteCRM\Api
+ */
+class SuiteCRMAccounts {
+
     /**
      * @var SuiteCRMConnect
      */
@@ -23,15 +27,19 @@ class SuiteCRMAccounts
     /**
      * SuiteCRMAccounts constructor.
      *
-     * @param SuiteCRMConnect $client
+     * @param $client
      */
-    public function __construct($client)
-    {
+    public function __construct($client) {
         $this->client = $client;
     }
 
-    public function getAccounts()
-    {
-        return $this->client->sess_id;
+    /**
+     * @param array $options
+     *
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function getAccounts($options = []){
+        return $this->client->post('get_entry_list','Accounts',$options);
     }
 }

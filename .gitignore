@@ -10,3 +10,5 @@ vendor/psr/
 vendor/autoload\.php
 
 composer\.lock
+
+\.idea/

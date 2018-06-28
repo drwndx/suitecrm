@@ -14,10 +14,10 @@ use Psr\Http\Message\ResponseInterface;
 
 
 /**
- * Class SuiteCRMLeads
+ * Class SuiteCRMAdmins
  * @package SuiteCRM\Api
  */
-class SuiteCRMLeads {
+class SuiteCRMAccounts {
 
     /**
      * @var SuiteCRMConnect
@@ -25,7 +25,7 @@ class SuiteCRMLeads {
     private $client;
 
     /**
-     * SuiteCRMAccounts constructor.
+     * SuiteCRMAdmins constructor.
      *
      * @param $client
      */
@@ -35,91 +35,81 @@ class SuiteCRMLeads {
 
     /**
      *
-     * Get Lead
+     * Get Admins
      *
      * @param array $options
      *
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function getLeads($options = []){
-        return $this->client->post('get_entry_list','Leads',$options);
+    public function getAdmins($options = []){
+        return $this->client->post('get_entry_list','Users',$options);
     }
 
 	/**
 	 *
-	 * Get Lead
+	 * Get Admin
 	 *
 	 * @param array $options
 	 *
 	 * @return mixed
 	 * @throws \GuzzleHttp\Exception\GuzzleException
 	 */
-    public function getLead($options = []){
-	    return $this->client->post('get_entry','Leads',$options);
+    public function getAdmin($options = []){
+	    return $this->client->post('get_entry','Users',$options);
     }
 
 	/**
 	 *
-	 * Get Field Defs for Leads
+	 * Create Admin
 	 *
 	 * @param array $options
 	 *
 	 * @return mixed
 	 * @throws \GuzzleHttp\Exception\GuzzleException
 	 */
-	public function getLeadFields($options = []){
-		return $this->client->post('get_module_fields','Leads',$options);
+    public function createAdmin($options = []){
+	    return $this->client->post('set_entry','Users',$options);
+    }
+
+	/**
+	 *
+	 * Get Field Defs for Admin
+	 *
+	 * @param array $options
+	 *
+	 * @return mixed
+	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 */
+	public function getAdminFields($options = []){
+		return $this->client->post('get_module_fields','Users',$options);
 	}
 
 	/**
 	 *
-	 * Create Lead
+	 * Update Admin
 	 *
 	 * @param array $options
 	 *
 	 * @return mixed
 	 * @throws \GuzzleHttp\Exception\GuzzleException
 	 */
-    public function createLead($options = []){
-	    return $this->client->post('set_entry','Leads',$options);
-    }
-
-
-	/**
-	 *
-	 * Smart Create Lead
-	 *
-	 */
-	public function smartCreateLead($leadData, $assignment_rule_id = null, $parseGACookies = true){
-		$lead  = $leadData->getApiObject();		
-	}
-
-	/**
-	 *
-	 * Update Lead
-	 *
-	 * @param array $options
-	 *
-	 * @return mixed
-	 * @throws \GuzzleHttp\Exception\GuzzleException
-	 */
-	public function updateLead
+	public function updateAdmin
 	($options = []){
-		return $this->client->post('set_entry','Leads',$options);
+		return $this->client->post('set_entry','Users',$options);
 	}
 
 	/**
 	 *
-	 * Delete Lead
+	 * Delete Admin
 	 *
 	 * @param array $options
 	 *
 	 * @return mixed
 	 * @throws \GuzzleHttp\Exception\GuzzleException
 	 */
-	public function deleteLead($options = []){
-		return $this->client->post('set_entry','Leads',$options);
+	public function deleteAccount($options = []){
+		return $this->client->post('set_entry','Users',$options);
 	}
 
 

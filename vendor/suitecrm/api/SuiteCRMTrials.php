@@ -14,10 +14,10 @@ use Psr\Http\Message\ResponseInterface;
 
 
 /**
- * Class SuiteCRMLeads
+ * Class SuiteCRMTrials
  * @package SuiteCRM\Api
  */
-class SuiteCRMLeads {
+class SuiteCRMTrials {
 
     /**
      * @var SuiteCRMConnect
@@ -25,7 +25,7 @@ class SuiteCRMLeads {
     private $client;
 
     /**
-     * SuiteCRMAccounts constructor.
+     * SuiteCRMTrials constructor.
      *
      * @param $client
      */
@@ -35,91 +35,81 @@ class SuiteCRMLeads {
 
     /**
      *
-     * Get Lead
+     * Get Trials
      *
      * @param array $options
      *
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function getLeads($options = []){
-        return $this->client->post('get_entry_list','Leads',$options);
+    public function getTrials($options = []){
+        return $this->client->post('get_entry_list','Trial_Trials',$options);
     }
 
 	/**
 	 *
-	 * Get Lead
+	 * Get Trial
 	 *
 	 * @param array $options
 	 *
 	 * @return mixed
 	 * @throws \GuzzleHttp\Exception\GuzzleException
 	 */
-    public function getLead($options = []){
-	    return $this->client->post('get_entry','Leads',$options);
+    public function getTrial($options = []){
+	    return $this->client->post('get_entry','Trial_Trials',$options);
     }
 
 	/**
 	 *
-	 * Get Field Defs for Leads
+	 * Create Trial
 	 *
 	 * @param array $options
 	 *
 	 * @return mixed
 	 * @throws \GuzzleHttp\Exception\GuzzleException
 	 */
-	public function getLeadFields($options = []){
-		return $this->client->post('get_module_fields','Leads',$options);
+    public function createTrial($options = []){
+	    return $this->client->post('set_entry','Trial_Trials',$options);
+    }
+
+	/**
+	 *
+	 * Get Field Defs for Trials
+	 *
+	 * @param array $options
+	 *
+	 * @return mixed
+	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 */
+	public function getTrialFields($options = []){
+		return $this->client->post('get_module_fields','Trial_Trials',$options);
 	}
 
 	/**
 	 *
-	 * Create Lead
+	 * Update Trial
 	 *
 	 * @param array $options
 	 *
 	 * @return mixed
 	 * @throws \GuzzleHttp\Exception\GuzzleException
 	 */
-    public function createLead($options = []){
-	    return $this->client->post('set_entry','Leads',$options);
-    }
-
-
-	/**
-	 *
-	 * Smart Create Lead
-	 *
-	 */
-	public function smartCreateLead($leadData, $assignment_rule_id = null, $parseGACookies = true){
-		$lead  = $leadData->getApiObject();		
-	}
-
-	/**
-	 *
-	 * Update Lead
-	 *
-	 * @param array $options
-	 *
-	 * @return mixed
-	 * @throws \GuzzleHttp\Exception\GuzzleException
-	 */
-	public function updateLead
+	public function updateTrial
 	($options = []){
-		return $this->client->post('set_entry','Leads',$options);
+		return $this->client->post('set_entry','Trial_Trials',$options);
 	}
 
 	/**
 	 *
-	 * Delete Lead
+	 * Delete Trial
 	 *
 	 * @param array $options
 	 *
 	 * @return mixed
 	 * @throws \GuzzleHttp\Exception\GuzzleException
 	 */
-	public function deleteLead($options = []){
-		return $this->client->post('set_entry','Leads',$options);
+	public function deleteTrial($options = []){
+		return $this->client->post('set_entry','Trial_Trials',$options);
 	}
 
 

@@ -12,7 +12,8 @@ namespace SuiteCRM\api;
  * Class SuiteCRMFinderResponse
  * @package SuiteCRM\api
  */
-class SuiteCRMFinderResponse {
+class SuiteCRMFinderResponse
+{
 	/**
 	 * @var int
 	 */
@@ -36,7 +37,12 @@ class SuiteCRMFinderResponse {
 	/**
 	 * @var array
 	 */
-	private $domains = array();
+	private $trials = array();
+
+	/**
+	 * @var array
+	 */
+	private $emails = array();
 
 	/**
 	 * @var array
@@ -71,29 +77,34 @@ class SuiteCRMFinderResponse {
 	public function __construct($repsonse)
 	{
 		// checkfor result
-		if (isset($response->result))
+		if (isset($response->entry_list))
 		{
 			// convert result to array if it is not one
-			if(!is_array($response->result)) $response->result = array($response->result);
+			if (!is_array($response->entry_list)) $response->entry_list = array($response->entry_list);
 
-			// get count from result
-			$this->count = count($response->result);
-
-			// check each result to assign variables based upon found objects
-			foreach ($response->result as $existingRecord)
+			foreach ($response->entry_list as $entryList)
 			{
-				switch ($existingRecord->RecordType)
+				if (isset($entryList->records))
 				{
-					case 'ACCOUNT':  $this->accounts[$existingRecord->RecordId__c] = $existingRecord; break;
-					case 'DOMAIN':   $this->domains[$existingRecord->RecordId__c] = $existingRecord; break;
-					case 'CONTACT':  $this->contacts[$existingRecord->RecordId__c] = $existingRecord; break;
-					case 'LEAD':     $this->leads[$existingRecord->RecordId__c] = $existingRecord; break;
-				}
+					foreach ($entryList->records as $record)
+					{
+						switch ($entryList->name)
+						{
+							case 'Accounts':  $this->accounts[$record->id->value] = $record; break;
+							case 'Contacts':  $this->contacts[$record->id->value] = $record; break;
+							case 'Leads':     $this->leads[$record->id->value] = $record; break;
 
-				// if an existing account is present, map account
-				if (isset($existingRecord->Account__c))
-				{
-					$this->accountMap[$existingRecord->Account__c][] = $existingRecord;
+							case 'Trial_Trials':   $this->trials[$record->id->value] = $record; break;
+							case 'Emails':   $this->emails[$record->id->values] = $record; break;
+						}
+
+						if (isset($record->id->value))
+						{
+							$this->accountMap[$record->id->value][] = $record;
+						}
+
+						$this->count++;
+					}
 				}
 			}
 		}
@@ -161,10 +172,65 @@ class SuiteCRMFinderResponse {
 		if ($this->hasLead())
 		{
 			$lead = current($this->getLeads());
-			return $lead->RecordId__c;
+			return $lead->id->value;
 		}
 		return null;
 	}
 
+	/**
+	 * @return array
+	 */
+	public function getAccounts()
+	{
+		return $this->accounts;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getContacts()
+	{
+		return $this->contacts;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getLeads()
+	{
+		return $this->leads;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getTrials()
+	{
+		return $this->trials;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getEmails()
+	{
+		return $this->emails;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getAccountMap()
+	{
+		return $this->accountMap;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getCount()
+	{
+		return $this->count;
+	}
 	
 }

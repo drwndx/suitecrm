@@ -341,4 +341,5 @@ class SuiteCRMConnect {
             echo ($e->getMessage() . "\n");
         }
     }
+
 }

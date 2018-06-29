@@ -18,7 +18,5 @@ use Psr\Http\Message\ResponseInterface;
  * @package SuiteCRM\Api
  */
 class SuiteCRMUtils {
-
-    
-
+	
 }

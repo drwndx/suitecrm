@@ -17,7 +17,7 @@ use Psr\Http\Message\ResponseInterface;
  * Class SuiteCRMAdmins
  * @package SuiteCRM\Api
  */
-class SuiteCRMAccounts {
+class SuiteCRMAdmins {
 
     /**
      * @var SuiteCRMConnect
@@ -108,7 +108,7 @@ class SuiteCRMAccounts {
 	 * @return mixed
 	 * @throws \GuzzleHttp\Exception\GuzzleException
 	 */
-	public function deleteAccount($options = []){
+	public function deleteAdmin($options = []){
 		return $this->client->post('set_entry','Users',$options);
 	}
 
